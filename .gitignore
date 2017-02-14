@@ -1,0 +1,6 @@
+.svn/
+.vs/
+bin/
+obj/
+*.xproj.user
+*.lock.json
