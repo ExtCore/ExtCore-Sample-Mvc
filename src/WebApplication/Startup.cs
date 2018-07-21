@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace WebApplication
 {
@@ -14,15 +13,9 @@ namespace WebApplication
   {
     private string extensionsPath;
 
-    public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
+    public Startup(IHostingEnvironment hostingEnvironment, IConfiguration configuration)
     {
-      IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-        .SetBasePath(hostingEnvironment.ContentRootPath)
-        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-      IConfigurationRoot configurationRoot = configurationBuilder.Build();
-
-      this.extensionsPath = hostingEnvironment.ContentRootPath + configurationRoot["Extensions:Path"];
+      this.extensionsPath = hostingEnvironment.ContentRootPath + configuration["Extensions:Path"];
     }
 
     public void ConfigureServices(IServiceCollection services)
